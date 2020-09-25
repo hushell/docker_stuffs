@@ -1,1 +1,1 @@
-# docker_stuffs
+# docker_stuffs## Fetch docker scripts:> git clone [https://github.com/hushell/docker_stuffs](https://github.com/hushell/docker_stuffs)## Launch docker container: ```GPU=0,1 ./custom-docker_v2 run --shm-size 128G -d bethgelab/deeplearning:cuda10.0-cudnn7```## Copy files from ```/home/sxhu/``` to ```/root``````sh cpy_home.sh```## Check all docker containers:```./dockerps```## Login docker:```sudo docker exec -it sxhu45 /bin/bash```## Logout docker container:> Ctrl + d
