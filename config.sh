@@ -4,6 +4,7 @@ apt-get update && apt-get install -y \
 # Python packages
 pip install torchaudio==0.5.0 soundfile tqdm jupyter matplotlib 
 pip install numpy Cython
+pip install -r requirements.txt
 
 # bashrc
 ~/miniconda/bin/conda init
