@@ -19,5 +19,12 @@ source ~/.bashrc
 
 
 # asteroid
-cd /mnt/scratch07/hushell/UploadAI/asteroid-avatar
+cd /app/hushell/UploadAI/asteroid-avatar
 pip install -e .
+
+
+# mnt
+cd /mnt
+sudo mkdir scratch07
+cd scratch07
+sudo ln -s /app/hushell hushell
