@@ -2,7 +2,7 @@ sudo apt-get update && sudo apt-get install -y \
 	vim screen htop wget gcc libsndfile1
 
 # Python packages
-pip install torchaudio==0.5.0 soundfile tqdm jupyter matplotlib 
+pip install torchaudio==0.5.0 soundfile tqdm jupyter jupyterlab matplotlib 
 pip install numpy Cython
 pip install -r requirements.txt
 
