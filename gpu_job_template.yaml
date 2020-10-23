@@ -10,7 +10,7 @@ spec:
     spec:
       restartPolicy: Never # Options are Always, OnFailure, and Never.
       hostNetwork: true # This option will allow the pod to use the host network for internet access
-      #priorityClassName: high-priority        
+      priorityClassName: high-priority        
       tolerations: # This toleration allows the pod to be schedule onto gpu-only pod machines, remove this if you are not using gpu
       - key: "gpu"
         operator: "Equal"
