@@ -1,11 +1,16 @@
 sudo apt-get update && sudo apt-get install -y \
-	vim screen htop wget gcc libsndfile1
+	vim screen htop wget gcc libsndfile1 g++
 sudo apt-get install -y git-core bash-completion
 
 # Python packages
 pip install torchaudio==0.5.0 soundfile tqdm jupyter jupyterlab matplotlib 
 pip install numpy Cython
 pip install -r requirements.txt
+
+git clone https://github.com/pytorch/fairseq
+cd fairseq
+pip install --editable ./
+cd ..
 
 # bashrc
 ~/miniconda/bin/conda init

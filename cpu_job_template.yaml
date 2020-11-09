@@ -1,7 +1,7 @@
 apiVersion: batch/v1 # Jobs Default K8 API
 kind: Job # This tells kubernetes what kind of class it is working with
 metadata:
-  name: hus4 # Name of the Job
+  name: huscpu # Name of the Job
 spec:
   #completions: 100
   parallelism: 1
@@ -10,12 +10,8 @@ spec:
     spec:
       restartPolicy: Never # Options are Always, OnFailure, and Never.
       hostNetwork: true # This option will allow the pod to use the host network for internet access
-      priorityClassName: high-priority        
+      #priorityClassName: high-priority        
       tolerations: # This toleration allows the pod to be schedule onto gpu-only pod machines, remove this if you are not using gpu
-      - key: "gpu"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
       volumes:
       - name: hushell
         hostPath:
@@ -23,24 +19,11 @@ spec:
       - name: dshm
         emptyDir:
           medium: Memory
-      affinity: # Affinity to select certain nodes with 11GB, 12GB, or 24GB memory
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution: # Require nodes to have this label
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: gpu_mem_size # Target label is gpu_mem_size
-                operator: In # Key must have one of the following values
-                values:
-                #- 8GB
-                #- 11GB
-                #- 12GB
-                - 24GB
-                - 32GB
       containers:
       - name: torch15
         #image: nvidia/cuda:9.0-base
         #image: anibali/pytorch:cuda-10.0
-        image: anibali/pytorch:1.5.0-cuda10.2
+        image: anibali/pytorch:1.5.0-nocuda-ubuntu18.04
         volumeMounts: # Container reference to volumes define above
         - name: hushell # Name of the volume define above
           mountPath: /app/hushell # Location of where to mount it in the container
@@ -51,9 +34,6 @@ spec:
             memory: 64G
             #cpu: "250m"
             ephemeral-storage: 50G
-          limits:
-            nvidia.com/gpu: 4 # requesting 4 GPUs
-            #cpu: "500m"
         #command: ["nvidia-smi"]
         command: [ "sleep" ]
         args: [ "infinity" ]
