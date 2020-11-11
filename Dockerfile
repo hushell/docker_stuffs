@@ -1,19 +1,18 @@
-FROM nvidia/cuda:10.2-base-ubuntu18.04
+FROM nvidia/cuda:11.0-runtime-ubuntu20.04
+
+LABEL maintainer="hushell"
+
+# Ubuntu OS Requirements
+RUN apt-get -y update && apt-get -y upgrade
 
 # Install some basic utilities
-RUN apt-get update && apt-get install -y \
+RUN apt-get install -y \
     curl \
     ca-certificates \
     sudo \
     git \
     bzip2 \
     libx11-6 \
-    htop \
-    vim \
-    screen \
-    wget \
-    gcc
-    libsndfile1
  && rm -rf /var/lib/apt/lists/*
 
 # Create a working directory
@@ -40,22 +39,43 @@ RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-py38
  && conda install -y python==3.8.1 \
  && conda clean -ya
 
-# CUDA 10.2-specific steps
-RUN conda install -y -c pytorch \
-    cudatoolkit=10.2 \
-    "pytorch=1.5.0=py3.8_cuda10.2.89_cudnn7.6.5_0" \
-    "torchvision=0.6.0=py38_cu102" \
+# Install Pytorch 1.7 + CUDA 11.0
+RUN conda install -y pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch \
  && conda clean -ya
+
+#####################################################################
+# Project specific
+RUN sudo apt-get update && sudo apt-get install -y \
+	vim screen htop wget gcc libsndfile1 g++ \
+ && sudo apt-get install -y git-core bash-completion
+
+# Python packages
+RUN pip install soundfile tqdm jupyter jupyterlab matplotlib \
+ && pip install numpy Cython \
+ && pip install PyYAML>=5.0 \
+                numpy>=1.16.4 \
+                pandas>=0.23.4 \
+                scipy>=1.1.0 \
+                pytorch-lightning==0.9.0 # not compatible with 1.0 \
+                pb_bss_eval>=0.0.2 \
+                torch_stoi>=0.0.1 \
+                torch_optimizer>=0.0.1a12 \
+                SoundFile>=0.10.2 \
+                pre-commit \
+                black==19.10b0 \
+                librosa>=0.8.0 \
+                pyloudnorm \
+                seaborn
+
+# bashrc
+RUN ~/miniconda/bin/conda init \
+ && echo "alias screen='screen -U'" >> ~/.bashrc \
+ && echo "defshell -bash" > ~/.screenrc \
+ && echo "source /usr/share/bash-completion/completions/git" >> ~/.bashrc \
+ && source ~/.bashrc \
+ && cp gitconfig ~/.gitconfig \
+
+#####################################################################
 
 # Set the default command to python3
 CMD ["python3"]
-
-# Python packages
-RUN pip install torchaudio==0.5.0 soundfile tqdm jupyter matplotlib 
-
-# bashrc
-RUN ~/miniconda3/bin/conda init
-RUN wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-RUN mv git-completion.bash ~/.git-completion.bash
-RUN echo "source ~/.git-completion.bash" >> ~/.bashrc
-RUN echo "defshell -bash" > ~/.screenrc
