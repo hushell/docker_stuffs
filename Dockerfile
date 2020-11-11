@@ -43,39 +43,5 @@ RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-py38
 RUN conda install -y pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch \
  && conda clean -ya
 
-#####################################################################
-# Project specific
-RUN sudo apt-get update && sudo apt-get install -y \
-	vim screen htop wget gcc libsndfile1 g++ \
- && sudo apt-get install -y git-core bash-completion
-
-# Python packages
-RUN pip install soundfile tqdm jupyter jupyterlab matplotlib \
- && pip install numpy Cython \
- && pip install PyYAML>=5.0 \
-                numpy>=1.16.4 \
-                pandas>=0.23.4 \
-                scipy>=1.1.0 \
-                pytorch-lightning==0.9.0 # not compatible with 1.0 \
-                pb_bss_eval>=0.0.2 \
-                torch_stoi>=0.0.1 \
-                torch_optimizer>=0.0.1a12 \
-                SoundFile>=0.10.2 \
-                pre-commit \
-                black==19.10b0 \
-                librosa>=0.8.0 \
-                pyloudnorm \
-                seaborn
-
-# bashrc
-RUN ~/miniconda/bin/conda init \
- && echo "alias screen='screen -U'" >> ~/.bashrc \
- && echo "defshell -bash" > ~/.screenrc \
- && echo "source /usr/share/bash-completion/completions/git" >> ~/.bashrc \
- && source ~/.bashrc \
- && cp gitconfig ~/.gitconfig \
-
-#####################################################################
-
 # Set the default command to python3
 CMD ["python3"]
