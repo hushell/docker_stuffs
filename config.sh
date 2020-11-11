@@ -3,7 +3,7 @@ sudo apt-get update && sudo apt-get install -y \
 sudo apt-get install -y git-core bash-completion
 
 # Python packages
-pip install torchaudio==0.5.0 soundfile tqdm jupyter jupyterlab matplotlib 
+pip install soundfile tqdm jupyter jupyterlab matplotlib 
 pip install numpy Cython
 pip install -r requirements.txt
 
