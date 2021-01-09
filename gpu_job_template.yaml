@@ -1,7 +1,7 @@
 apiVersion: batch/v1 # Jobs Default K8 API
 kind: Job # This tells kubernetes what kind of class it is working with
 metadata:
-  name: hus4 # Name of the Job
+  name: hus4-tmp # Name of the Job
 spec:
   #completions: 100
   parallelism: 1
@@ -10,7 +10,7 @@ spec:
     spec:
       restartPolicy: Never # Options are Always, OnFailure, and Never.
       hostNetwork: true # This option will allow the pod to use the host network for internet access
-      priorityClassName: high-priority        
+      #priorityClassName: high-priority        
       tolerations: # This toleration allows the pod to be schedule onto gpu-only pod machines, remove this if you are not using gpu
       - key: "gpu"
         operator: "Equal"
@@ -35,9 +35,9 @@ spec:
                 #- 11GB
                 #- 12GB
                 - 24GB
-                - 32GB
+                #- 32GB
       containers:
-      - name: torch15
+      - name: torch17
         #image: nvidia/cuda:9.0-base
         #image: anibali/pytorch:cuda-10.0
         #image: anibali/pytorch:1.5.0-cuda10.2
@@ -53,7 +53,7 @@ spec:
             #cpu: "250m"
             ephemeral-storage: 50G
           limits:
-            nvidia.com/gpu: 4 # requesting 4 GPUs
+            nvidia.com/gpu: 1 # requesting 4 GPUs
             #cpu: "500m"
         #command: ["nvidia-smi"]
         command: [ "sleep" ]

@@ -1,6 +1,6 @@
 sudo apt-get update && sudo apt-get install -y \
 	vim screen htop wget gcc libsndfile1 g++
-sudo apt-get install -y git-core bash-completion
+sudo apt-get install -y git-core bash-completion unzip
 
 # Python packages
 pip install soundfile tqdm jupyter jupyterlab matplotlib 
@@ -30,3 +30,7 @@ cd /mnt
 sudo mkdir scratch07
 cd scratch07
 sudo ln -s /app/hushell hushell
+
+
+# bugfix
+pip install --upgrade 'jedi<0.18.0'
