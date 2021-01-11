@@ -21,8 +21,8 @@ source ~/.bashrc
 cp gitconfig ~/.gitconfig
 
 # asteroid
-cd /app/hushell/UploadAI/asteroid-avatar
-pip install -e .
+#cd /app/hushell/UploadAI/asteroid-avatar
+#pip install -e .
 
 
 # mnt
