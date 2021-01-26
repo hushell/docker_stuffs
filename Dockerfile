@@ -1,19 +1,18 @@
-FROM nvidia/cuda:10.2-base-ubuntu18.04
+FROM nvidia/cuda:11.0-runtime-ubuntu20.04
+
+LABEL maintainer="hushell"
+
+# Ubuntu OS Requirements
+RUN apt-get -y update && apt-get -y upgrade
 
 # Install some basic utilities
-RUN apt-get update && apt-get install -y \
+RUN apt-get install -y \
     curl \
     ca-certificates \
     sudo \
     git \
     bzip2 \
     libx11-6 \
-    htop \
-    vim \
-    screen \
-    wget \
-    gcc
-    libsndfile1
  && rm -rf /var/lib/apt/lists/*
 
 # Create a working directory
@@ -40,22 +39,9 @@ RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-py38
  && conda install -y python==3.8.1 \
  && conda clean -ya
 
-# CUDA 10.2-specific steps
-RUN conda install -y -c pytorch \
-    cudatoolkit=10.2 \
-    "pytorch=1.5.0=py3.8_cuda10.2.89_cudnn7.6.5_0" \
-    "torchvision=0.6.0=py38_cu102" \
+# Install Pytorch 1.7 + CUDA 11.0
+RUN conda install -y pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch \
  && conda clean -ya
 
 # Set the default command to python3
 CMD ["python3"]
-
-# Python packages
-RUN pip install torchaudio==0.5.0 soundfile tqdm jupyter matplotlib 
-
-# bashrc
-RUN ~/miniconda3/bin/conda init
-RUN wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-RUN mv git-completion.bash ~/.git-completion.bash
-RUN echo "source ~/.git-completion.bash" >> ~/.bashrc
-RUN echo "defshell -bash" > ~/.screenrc
