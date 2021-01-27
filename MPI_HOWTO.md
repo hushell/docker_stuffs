@@ -18,4 +18,5 @@ sh mpi_login_docker.sh sxhu045
 ```
 cd /mnt/qb/bethge/sxhu/docker_stuffs
 sh mpi_config.sh
+source ~/.bashrc
 ```
