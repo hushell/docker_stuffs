@@ -6,7 +6,7 @@ cd ~
 bash ~/miniconda.sh -b -p ~/miniconda
 cd -
 
-conda install -y python==3.8.1
+conda install -y python==3.7.4
 conda clean -ya
 
 # Install Pytorch 1.7 + CUDA 11.0
