@@ -1,7 +1,7 @@
 apiVersion: batch/v1 # Jobs Default K8 API
 kind: Job # This tells kubernetes what kind of class it is working with
 metadata:
-  name: hus4-tmp # Name of the Job
+  name: hus-close # Name of the Job
 spec:
   #completions: 100
   parallelism: 1
@@ -53,7 +53,7 @@ spec:
             #cpu: "250m"
             ephemeral-storage: 50G
           limits:
-            nvidia.com/gpu: 1 # requesting 4 GPUs
+            nvidia.com/gpu: 4 # requesting 4 GPUs
             #cpu: "500m"
         #command: ["nvidia-smi"]
         command: [ "sleep" ]

@@ -4,7 +4,7 @@ sudo apt-get install -y git-core bash-completion unzip
 
 # Python packages
 pip install soundfile tqdm jupyter jupyterlab matplotlib 
-pip install numpy Cython
+pip install numpy Cython dotmap
 pip install -r requirements.txt
 
 git clone https://github.com/pytorch/fairseq
