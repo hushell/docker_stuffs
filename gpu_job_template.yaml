@@ -1,7 +1,7 @@
 apiVersion: batch/v1 # Jobs Default K8 API
 kind: Job # This tells kubernetes what kind of class it is working with
 metadata:
-  name: hus-close # Name of the Job
+  name: hus-both-4x3090 # Name of the Job
 spec:
   #completions: 100
   parallelism: 1
@@ -36,6 +36,12 @@ spec:
                 #- 12GB
                 - 24GB
                 #- 32GB
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - at-gpu10
+                - at-gpu11
+                - at-gpu12
       containers:
       - name: torch17
         #image: nvidia/cuda:9.0-base
