@@ -1,7 +1,7 @@
 apiVersion: batch/v1 # Jobs Default K8 API
 kind: Job # This tells kubernetes what kind of class it is working with
 metadata:
-  name: hus-both-4x3090 # Name of the Job
+  name: hus-vit-4x3090 # Name of the Job
 spec:
   #completions: 100
   parallelism: 1
@@ -19,7 +19,7 @@ spec:
       volumes:
       - name: hushell
         hostPath:
-          path: /mnt/scratch07/hushell # Directory on the host machine to be mounted
+          path: /mnt/scratch07 # Directory on the host machine to be mounted
       - name: dshm
         emptyDir:
           medium: Memory

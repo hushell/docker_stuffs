@@ -15,3 +15,5 @@ tqdm
 SoundFile>=0.10.2
 asteroid-filterbanks>=0.2.4
 asteroid>=0.4.1
+tensorboard
+ml-collections
