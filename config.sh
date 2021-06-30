@@ -1,10 +1,10 @@
 sudo apt-get update && sudo apt-get install -y \
-	vim screen htop wget gcc libsndfile1 g++
+	vim screen htop wget gcc libsndfile1 g++ ffmpeg
 sudo apt-get install -y git-core bash-completion unzip
 
 # Python packages
 pip install soundfile tqdm jupyter jupyterlab matplotlib 
-pip install numpy Cython dotmap gym h5py gym_minigrid blosc opencv-python 
+pip install numpy Cython dotmap gym h5py gym_minigrid blosc opencv-python opencv-python-headless
 pip install -r requirements.txt
 
 git clone https://github.com/pytorch/fairseq
