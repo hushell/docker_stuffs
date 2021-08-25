@@ -12,7 +12,7 @@ sudo apt-get install -y \
 
 # System packages
 sudo apt-get update && sudo apt-get install -y \
-	vim screen htop wget gcc libsndfile1 g++
+	vim screen htop wget gcc libsndfile1 g++ ctags
 sudo apt-get install -y git-core bash-completion unzip
 
 # Install Miniconda and Python 3.8
@@ -31,7 +31,7 @@ conda clean -ya
 
 # Python packages
 pip install soundfile tqdm jupyter jupyterlab matplotlib 
-pip install numpy Cython dotmap gym h5py gym_minigrid blosc opencv-python
+pip install numpy Cython dotmap gym h5py gym_minigrid blosc opencv-python opencv-python-headless
 pip install -r requirements.txt
 
 # bashrc
