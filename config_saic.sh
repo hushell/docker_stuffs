@@ -8,15 +8,19 @@ sudo apt-get install -y \
     sudo \
     git \
     bzip2 \
-    libx11-6 \
- && sudo rm -rf /var/lib/apt/lists/*
+    libx11-6 
+
+# System packages
+sudo apt-get update && sudo apt-get install -y \
+	vim screen htop wget gcc libsndfile1 g++
+sudo apt-get install -y git-core bash-completion unzip
 
 # Install Miniconda and Python 3.8
 curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-py38_4.8.2-Linux-x86_64.sh \
  && chmod +x ~/miniconda.sh \
- && ~/miniconda.sh -b 
+ && ~/miniconda.sh
 
-source /home/user/miniconda3/etc/profile.d/conda.sh
+. /home/user/miniconda3/etc/profile.d/conda.sh
 conda activate base
 conda init
 
@@ -24,11 +28,6 @@ conda init
 conda install -y python==3.8.1 
 conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge
 conda clean -ya
-
-# System packages
-sudo apt-get update && sudo apt-get install -y \
-	vim screen htop wget gcc libsndfile1 g++
-sudo apt-get install -y git-core bash-completion unzip
 
 # Python packages
 pip install soundfile tqdm jupyter jupyterlab matplotlib 
